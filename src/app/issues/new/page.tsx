@@ -1,10 +1,16 @@
 "use client";
 import { Button, TextArea, TextField ,} from "@radix-ui/themes";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; 
 import "easymde/dist/easymde.min.css";
 import { Controller, useForm } from "react-hook-form";
-import SimpleMDE from "react-simplemde-editor";
+
+import dynamic from 'next/dynamic';
+
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { 
+  ssr: false  // 禁用服务端渲染
+});
+
 
 interface IssueForm {
   title: string;
@@ -23,8 +29,6 @@ const NewIssuePage = () => {
       {/* <TextField.Root>
         <TextField.input placeholder="Title" />
       </TextField.Root> */}
-
-      
       <TextField.Root placeholder="Title" {...register("title")}>
         {/* <TextField.Slot /> */}
 </TextField.Root>
@@ -38,7 +42,6 @@ const NewIssuePage = () => {
           <SimpleMDE placeholder="Description" {...field} />
         )}
       />
-      
       <Button>Submit New</Button>
     </form>
   );
