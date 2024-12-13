@@ -1,8 +1,10 @@
 "use client";
 import classNames from "classnames";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiFillBug } from "react-icons/ai";
+
 
 const NavBar = () => {
   return (
@@ -21,9 +23,11 @@ const links = [
 ];
 
 const NavLinks = () => {
+  const {status ,data:session} =useSession();
   const currentPath = usePathname();
 
   return (
+    <div>
     <ul className="flex gap-6 items-center">
       {links.map((link) => (
         <Link
@@ -38,6 +42,21 @@ const NavLinks = () => {
           {link.label}
         </Link>
       ))}{" "}
+
+      {status === "loading" && <div>Loading...</div>}
+      {status === "authenticated" && (
+        <div>{session.user!.name}
+        <Link href="api/auth/signout" className="ml-3">
+        Sign Out
+        </Link>
+        </div>)}
+      {status === "unauthenticated" && (
+        <Link href="/api/auth/signin">Login</Link>
+        
+      )}
     </ul>
+
+    </div>
+    
   );
 };
