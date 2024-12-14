@@ -10,7 +10,8 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "6.0.1",
+    "@auth/prisma-adapter": "^2.7.4",
+    "@prisma/client": "^6.0.1",
     "@radix-ui/themes": "^3.1.6",
     "@types/node": "22.10.1",
     "@types/react": "19.0.1",
