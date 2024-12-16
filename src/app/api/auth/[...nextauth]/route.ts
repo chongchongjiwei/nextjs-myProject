@@ -21,7 +21,7 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
-  secret: "huangyuan",
+  secret: process.env.NEXT_PUBLIC_SECRET
 };
 
 const handler = NextAuth(authOptions);
