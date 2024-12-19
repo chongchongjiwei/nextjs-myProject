@@ -5,8 +5,8 @@ import prisma from "@/../../prisma/client"
 import schema from "./schema";
 
 // const prisma = new PrismaClient()
-export async function GET(request:NextRequest){
-  const users= await prisma.user.findMany();
+export async function GET(request: NextRequest) {
+  const users = await prisma.user.findMany();
 
   return NextResponse.json(users);
 }
@@ -22,6 +22,7 @@ export async function GET(request:NextRequest){
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const validation = schema.safeParse(body);
+  console.log("打印日志", body);
   if (!validation.success)
     return NextResponse.json(validation.error.errors, { status: 400 });
   // 检查是否已有重复
